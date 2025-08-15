@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  title        String
+  description  String
+  imageUrl     String?
+  ingredients  String // JSON stringified array
+  instructions String // JSON stringified array
+  userId       String // ✅ Add this line
+  user         User     @relation(fields: [userId], references: [id]) // ✅ Add this line
+  favoritedBy  User[]   @relation("Favorites")
+}
+
+model User {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Optional: one-to-many relationship if we want authors later
+  recipes  Recipe[]
+  mealPlan MealPlan? @relation("UserMealPlan")
+  favorites Recipe[] @relation("Favorites")
+}
+
+model MealPlan {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation("UserMealPlan", fields: [userId], references: [id])
+  // Example: {"monday": {"lunch": "recipeId1", "dinner": "recipeId2"}, ...}
+  week   Json
+}

@@ -1,0 +1,44 @@
+{
+  "name": "remix-recipes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "remix dev",
+    "start": "remix-serve build/server/index.js",
+    "prisma:seed": "node prisma/seed.cjs",
+     "dev:css": "tailwindcss -i ./app/styles/tailwind.css -o ./public/styles/tailwind.css --watch",
+  "build:css": "tailwindcss -i ./app/styles/tailwind.css -o ./public/styles/tailwind.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^6.13.0",
+    "@remix-run/node": "^2.17.0",
+    "@remix-run/react": "^2.17.0",
+    "@remix-run/serve": "^2.17.0",
+    "bcryptjs": "^3.0.2",
+    "isbot": "^4.4.0",
+    "react": "^18.3.1",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^2.17.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "prisma": "^6.13.0",
+    "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.5"
+  }
+}
