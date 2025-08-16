@@ -1,6 +1,6 @@
 {
   "version": 2,
   "builds": [
-    { "src": "package.json", "use": "@vercel/remix" }
+    { "src": "package.json", "use": "prisma generate && remix build" }
   ]
 }
