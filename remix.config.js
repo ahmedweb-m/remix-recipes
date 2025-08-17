@@ -1,5 +1,5 @@
-// remix.config.js (repo root)
-module.exports = {
+// remix.config.js (ESM)
+export default {
   serverBuildTarget: "vercel",
   serverModuleFormat: "esm",
   ignoredRouteFiles: ["**/.*"],
