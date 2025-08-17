@@ -1,22 +1,33 @@
+// vite.config.js (top)
+import { vitePlugin as remix } from "@remix-run/dev";
+import { vercelPreset } from "@vercel/remix/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vite";
 import path from "path";
-import { vitePlugin as remix } from "@remix-run/dev";
-import { vercelPreset } from '@vercel/remix/vite';
-import { installGlobals } from '@remix-run/node';
-import tsconfigPaths from "vite-tsconfig-paths";
+import { installGlobals } from "@remix-run/node";
 
 installGlobals();
-// vite.config.js (top)
-console.log('>>> VITE CONFIG LOADED — NODE_ENV=', process.env.NODE_ENV);
+
+const remPlugin = remix({
+  presets: [vercelPreset()],
+});
+
+// debug prints for CI (this will show in Vercel logs)
+console.log(">>> REMIX PLUGIN CREATED:", !!remPlugin);
 try {
-  // will show whether the vercelPreset symbol exists at import time
-  import('@vercel/remix/vite').then(m => {
-    console.log('>>> vercelPreset import ok — typeof:', typeof m.vercelPreset);
-  }).catch(e => {
-    console.error('>>> vercelPreset import FAILED:', e && e.message ? e.message : e);
-  });
+  // attempt to inspect plugin internals
+  console.log(">>> remPlugin keys:", Object.keys(remPlugin || {}));
+  if (remPlugin && remPlugin.config) {
+    // if the plugin exposes its config or presets, show it
+    try {
+      const cfg = remPlugin.config;
+      console.log(">>> remPlugin.config (type):", typeof cfg);
+    } catch (e) {
+      console.log(">>> remPlugin.config read failed:", e && e.message);
+    }
+  }
 } catch (e) {
-  console.error('>>> vercelPreset top-level import try-catch failed:', e && e.message ? e.message : e);
+  console.log(">>> remPlugin introspect failed:", e && e.message);
 }
 
 export default defineConfig({
@@ -26,9 +37,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    remix({
-      presets: [vercelPreset()],
-    }),
+    remPlugin,
     tsconfigPaths(),
   ],
 });
