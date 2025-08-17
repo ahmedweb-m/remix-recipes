@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "prebuild": "node ./scripts/check-presets.mjs",
+    "prebuild": "node ./scripts/validate-preset.mjs && node ./scripts/check-presets.mjs",
     "build": "prisma generate && remix build",
     "start": "remix-serve build",
     "prisma:seed": "node prisma/seed.cjs",
