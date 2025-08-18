@@ -252,8 +252,9 @@ Optimistic UI: useFetcher + fetcher.submission gives immediate responsiveness wi
 ## Deployment notes
 For production use Postgres or another proper DB. Set DATABASE_URL accordingly.
 Use npx prisma migrate deploy in CI for production database migrations.
-Build Remix (npm run build) and serve according to host (Vercel, Fly, Railway, etc.).
+Build Remix (npm run build) and serve according to host (Render, Vercel, Fly, Railway, etc.).
 Ensure SESSION_SECRET is set in production env.
+Live URL: https://remix-recipes-yaj5.onrender.com/
 
 ## License
-MIT License — You are free to use, modify, and distribute this project
+MIT License 

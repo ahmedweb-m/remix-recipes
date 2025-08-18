@@ -1,4 +1,3 @@
-// vite.config.js — async factory to ensure Remix can load it reliably in CI
 import { defineConfig } from "vite";
 import path from "path";
 import tsconfigPaths from "vite-tsconfig-paths";
